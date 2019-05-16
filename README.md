@@ -1,0 +1,1 @@
+# Manga Scripts for Indesign
