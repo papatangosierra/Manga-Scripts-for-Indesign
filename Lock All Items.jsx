@@ -1,0 +1,1 @@
+﻿function lockAllItems () {    app.activeDocument.pageItems.everyItem().locked = true;  }lockAllItems()
