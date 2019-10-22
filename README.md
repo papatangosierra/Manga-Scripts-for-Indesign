@@ -8,7 +8,7 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 
 **Move All Graphics to Art Layer** moves all graphic frames in the document to the bottom-most layer.
 
-**Move Page Graphics to Art Layer** moves all graphic frames on the current page do the bottom-most layer.
+**Move Page Graphics to Art Layer** moves all graphic frames on the current page to the bottom-most layer.
 
 **Set Master Art Scaling** adjust the master page graphic frames created using **Create Master Page Art Frames** in such a way as to affect the scaling of every image placed in one of the child graphic frames. This allows you to quickly find an appropriate scaling percentage for placed artwork _en masse_, without having to individually adjust every graphic frame. Please be advised of the following caveats:
 
@@ -30,13 +30,15 @@ Despite its reputation for fanciful panel layouts, a given manga typically estab
 
 **Toggle Binding Direction** changes the binding direction of the document from right-to-left to left-to-right, and vice versa.
 
-**Reverse Interior** fixes Yen Press books. Wait, no, I mean it reverses the spread order and binding direction of the entire document. This takes a few seconds, so it displays a progress bar as it works. **Note:** A minor bug causes the contents of the very first and last pages to be mis-placed after reversal. Fixing this bug is not a high priority for yours truly, since manual correction is quite easy, and frankly I just reversed a whole volume of manga for you so I really think _you_ should be thanking _me_.
+**Reverse Interior** reverses the spread order and binding direction of the entire document, i.e., it fixes Yen Press books. This takes a few seconds, so it displays a progress bar as it works. **Note:** A minor bug causes the contents of the very first and last pages to be mis-placed after reversal. Fixing this bug is not a high priority for yours truly, since manual correction is quite easy, and frankly I just reversed a whole volume of manga for you so I really think _you_ should be thanking _me_.
 
 **Toggle Left Page Number** applies or un-applies the _B-Master_ page to the left-hand page of the current spread. The assumption here is that the letterer will have set up _B-Master_ to include an automatically-generated page number. Improving the script to simply do this for the letterer is a high priority. 
 
 **Toggle Right Page Number** applies or un-applies the _B-Master_ page to the left-hand page of the current spread.
 
 ## Text Design
+
+These are a collections of scripts to aid in designing more expressive sound effect subtitles.
 
 **Escalate Characters** adjusts the text in a text frame such that each character is slightly larger than the character before it, such that the text appears to get "louder."
 
@@ -59,13 +61,33 @@ Despite its reputation for fanciful panel layouts, a given manga typically estab
 
 ## Et Cetera
 
-I'm tired, and will write the rest of this document later.
+**Create New R-to-L Document** creates a new document with the binding direction set right-to-left. This may be useful for older versions of InDesign where the document's binding direction cannot be changed after it's created.
+
+**Create Translation Note Graphic** creates a thumbnail for excerpting a section of a page in translation endnotes. To use this script, select every object that will appear—even partially—in the thumbnail, then run the script. It will move a grouped and framed copy of the selected objects to the clipboard, and create a "Translation Note Graphic" object style if one does not already exist. You can use this style to give the thumbnails a stroke (I recommend a stroke size of 1 point). Note that there circumstances wherein thumbnails created this way can generate overset text errors, and the author hasn't quite figured out why, yet.
+
+**Find Empty Text Frames** selects the next text frame that contains no text, and displays an alert if it finds none. This is useful for checking a finished book or section for missed lettering.
+
+**Get Dimension** displays an alert with the current selection's geometric bounds. It is useful mostly as a diagnostic tool for scripting.
+
+**Lock All Items** locks every item in the document.
+
+**Unlock All Items** unlocks every item in the document.
+
+**Select All On Left Page** selects all items on the left hand page of the current spread, irrespective of binding direction.
+
+**Select All On Left Page** selects all items on the right hand page of the current spread, irrespective of binding direction.
+
+**Match Art Frame to Page Size** takes the current selection and adjusts the bounds of any object on the bottom-most layer to match the page size plus 1/8" bleed on non-spine edges. It ignores objects that are not in the bottom-most layer. In conjunction with the **Select All On Left/Right Page** scripts, it's a useful tool for quickly adjusting the placement of a lettered page layout. It can also be run after selecting all items in a spread. This script also takes pains to correctly account for binding direction.
+
+**Squeeze Line** reduces the horizontal scaling of the current line of text by 5%. This is useful for fitting text in narrow ballons. Note that the "current line" is defined as "whatever line the cursor is currently on." This script can be run repeatedly, although I generally avoid dipping below a scaling factor of 80%.
+
+**Unbreak Text** removes all line breaks from the currently selected text frame. This is useful for quickly returning to a clean slate when trying to fit text into a constrained space.
 
 ## TODO
 
 - Add better (which is to say, any) error handling in basically all scripts
 - Add setup script for B-Master page (which will include a page number) (or add that handling logic to the "toggle page number" scripts)
-- Add script that moves all text fames to Text layer.
+- Add script that moves all text frames to Text layer.
 - Add setup scripts for common dialogue, caption, aside, and SFX paragraph styles
 - Add setup scripts for common character styles
 - Improve SFX scripts to be undo-able in a single ctrl-z.
