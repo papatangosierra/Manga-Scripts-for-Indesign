@@ -1,6 +1,6 @@
 # Manga Scripts for Indesign
 
-Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision during the specialized work of lettering Japanese comics in English.
+Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision when lettering Japanese comics in English.
 
 ## Art Placement
 
