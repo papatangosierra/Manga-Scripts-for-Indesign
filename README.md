@@ -10,6 +10,8 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 
 **Move Page Graphics to Art Layer** moves all graphic frames on the current page to the bottom-most layer.
 
+**Auto-Place Art From Folder** is extremely fragile, but currently does allow you to specify a folder from which art whose filenames matches a certain pattern will be automatically placed on the appropriate page. This is more for experimentation than it is for serious use.
+
 **Set Master Art Scaling** adjust the master page graphic frames created using **Create Master Page Art Frames** in such a way as to affect the scaling of every image placed in one of the child graphic frames. This allows you to quickly find an appropriate scaling percentage for placed artwork _en masse_, without having to individually adjust every graphic frame. Please be advised of the following caveats:
 
 - The scaling percentage is applied based on the current scaling equalling 100%. This means if you set a scaling percentage of 80%, then decide that's too small and  re-run the script with a percentage of 90%, the art will get smaller again, because you are specifying a size that's 90% as big as the size that resulted from the first 80% scaling.
