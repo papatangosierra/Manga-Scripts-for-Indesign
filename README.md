@@ -59,6 +59,8 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 **Rotate Characters** rotates each character in the text box by a slight random amount, alternating clockwise and counterclockwise directions.
 
+**Stack Characters** stacks all of the text in a frame vertically, with a line break between each character
+
 ## Et Cetera
 
 **Create New R-to-L Document** creates a new document with the binding direction set right-to-left. This may be useful for older versions of InDesign where the document's binding direction cannot be changed after it's created.
