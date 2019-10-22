@@ -1,1 +1,0 @@
-﻿function escalateChars(obj){    for (var i = 0; i < obj.characters.length; i++) {        if (i > 0) // if not first char {        {            obj.characters[i].pointSize = (obj.characters[i-1].pointSize * (1 + (1 / obj.characters.length))) // increase by 1/length every character        }    }}escalateChars(app.selection[0])

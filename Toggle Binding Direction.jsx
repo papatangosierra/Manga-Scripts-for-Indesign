@@ -1,1 +1,0 @@
-app.documents[0].documentPreferences.pageBinding = app.documents[0].documentPreferences.pageBinding == PageBindingOptions.LEFT_TO_RIGHT ? PageBindingOptions.RIGHT_TO_LEFT : PageBindingOptions.LEFT_TO_RIGHT;
