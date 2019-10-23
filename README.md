@@ -63,6 +63,8 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 **Stack Characters** stacks all of the text in a frame vertically, with a line break between each character
 
+![example of the output of the various text design scripts](Text Design/Text Design Examples.png)
+
 ## Et Cetera
 
 **Create New R-to-L Document** creates a new document with the binding direction set right-to-left. This may be useful for older versions of InDesign where the document's binding direction cannot be changed after it's created.
