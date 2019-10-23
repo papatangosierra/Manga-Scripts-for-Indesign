@@ -6,15 +6,21 @@ var w = new Window ("palette"); // must be defined at top level
 var myMessage = w.add ("statictext"); 
 myMessage.text = "Placing artwork...";
 
-var artFileMatchExpr = /P\d+\.(tif|TIF|psd|PSD|tiff|TIFF)|\d+p\.(tif|TIF|psd|PSD|tiff|TIFF)/ // Regular expression to find art with page numbers
+// Regular expression to find single-page art with page numbers.
+// Matches "P04.tif", "44.psd", etc.
+var singlePgMatchExpr = /[pP]?\d+\.(tif|TIF|psd|PSD|tiff|TIFF)/ // Regular expression to find single-page art with page numbers
+
+// Regular expression to find two-page art files with two page numbers across a spread.
+// Matches "P04.tif", "44.psd", etc.
+var doublePgMatchExpr = /[pP]?\d+[\-\_][pP]?\d+\.(tif|TIF|psd|PSD|tiff|TIFF)/ // Regular expression to find single-page art with page numbers
 
 /* Function for recursively pushing matching art files onto artFileArr. It's not great to have a recursive function modifying an array outside of its own scope,
 but I don't feel like figuring out how to make fileList more cleanly recursive right now. */
 
-function findArtFiles(fileList) { // add files whose names match artFileMatchExpr to the artFileArr array
+function findArtFiles(fileList) { // add files whose names match singlePgMatchExpr to the artFileArr array
     var foundFiles = []
     for (i=0; i < fileList.length; i++) {
-        if (fileList[i].displayName.match(artFileMatchExpr)) { // if current element's filename matches our expression
+        if (fileList[i].displayName.match(singlePgMatchExpr)) { // if current element's filename matches our expression
             foundFiles.push(fileList[i]) // add file to the array we'll be returning
         }
         if (Folder.isPrototypeOf(fileList[i])) { // if the current element has the Folder object as a prototype, e.g., it is a folder…

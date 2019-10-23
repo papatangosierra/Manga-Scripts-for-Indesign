@@ -5,6 +5,8 @@ app.scriptPreferences.measurementUnit = MeasurementUnits.POINTS;
 oldOrigin = app.activeDocument.viewPreferences.rulerOrigin // save old ruler origin
 app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN
 
+// Set up right-to-left binding order
+app.activeDocument.documentPreferences.pageBinding = PageBindingOptions.RIGHT_TO_LEFT
 
 // Create a new layer for putting Guides on, if it doesn't already exist
 if (app.activeDocument.layers.itemByName('Art') == null ) {
@@ -54,7 +56,11 @@ theMaster = app.activeDocument.masterSpreads.itemByName('A-Master')
 // Place art boxes at 100% of page size
 for (var i=0; i < theMaster.pages.length; i++) {
     thisRect = theMaster.pages[i].rectangles.add( // create a rect on the art layer of the current page
+        app.activeDocument.layers.itemByName('Art'),  // art layer
+        LocationOptions.AT_BEGINNING, // inside the beginning of the list of objects 
+        theMaster.pages[i],  // with the current page as the reference object
         {
+            name: 'ArtFrame',
             layer: app.activeDocument.layers.itemByName('Art'), 
             geometricBounds: theMaster.pages[i].bounds, 
             contentType: ContentType.GRAPHIC_TYPE, // make sure to specify that this is a graphic container

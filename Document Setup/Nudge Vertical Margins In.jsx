@@ -26,10 +26,10 @@ app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN
 theMaster = app.activeDocument.masterSpreads.itemByName('A-Master')
 
 // Add or subtract 1 point from guides' current locations
-theMaster.guides.itemByName("VersoLeft").location += 1
-theMaster.guides.itemByName("RectoLeft").location += 1
-theMaster.guides.itemByName("VersoRight").location -= 1
-theMaster.guides.itemByName("RectoRight").location -= 1
+theMaster.guides.itemByName("RectoInside").location += 1
+theMaster.guides.itemByName("RectoOutside").location -= 1
+theMaster.guides.itemByName("VersoInside").location -= 1
+theMaster.guides.itemByName("VersoOutside").location += 1
 
 
 
