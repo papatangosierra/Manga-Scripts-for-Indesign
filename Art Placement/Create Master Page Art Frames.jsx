@@ -8,10 +8,17 @@ app.activeDocument.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN
 // Set up right-to-left binding order
 app.activeDocument.documentPreferences.pageBinding = PageBindingOptions.RIGHT_TO_LEFT
 
-// Create a new layer for putting Guides on, if it doesn't already exist
-if (app.activeDocument.layers.itemByName('Art') == null ) {
-    app.activeDocument.layers.add({name:'Art'}) 
-}
+// Initialize first layer as Art layer
+app.activeDocument.layers[0].name = 'Art'
+var artLayer = app.activeDocument.layers[0]
+
+// Create other standard layers
+var designLayer = app.activeDocument.layers.add({name:'Design'}) 
+var retouchingLayer = app.activeDocument.layers.add({name:'Retouching'}) 
+var pageNumberLayer = app.activeDocument.layers.add({name:'Page Numbers'}) 
+var SFXLayer = app.activeDocument.layers.add({name:'SFX'}) 
+var textLayer = app.activeDocument.layers.add({name:'Text'})
+
 
 // This reuses the function from the "match art frame to page size plus bleed" script
 // 
