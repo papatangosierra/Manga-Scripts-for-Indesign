@@ -9,3 +9,4 @@ if (app.activeWindow.activeSpread.pages[1].appliedMaster.name != 'B-Master') { /
 } else {
     applyMasterToPage(app.activeWindow.activeSpread.pages[1], 'A-Master')
 }
+

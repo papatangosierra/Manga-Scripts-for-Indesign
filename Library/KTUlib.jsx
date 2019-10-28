@@ -11,9 +11,20 @@ var thePages  = app.activeDocument.pages
 var theLayers = app.activeDocument.layers
 var theMaster = app.activeDocument.masterSpreads.itemByName('A-Master')
 
+// EXECUTE SCRIPT AS SINGLE UNDOABLE STEP
+// Argument: 1: The script to execute, 2: A string representing the name of the script
+// Returns: The the return value of the executed script, maybe.
+function KTUDoScriptAsUndoable(theScript, scriptDesc) {
+    if (parseFloat(app.version) < 6) {
+        return theScript() // execute script
+    } else {
+        app.doScript(theScript, ScriptLanguage.JAVASCRIPT, undefined, UndoModes.ENTIRE_SCRIPT, scriptDesc)
+    }
+}
+
 // MATCH PAGE TO BLEED SIZE
 
-function KTUmatchFrameToBleedSize(theFrame) {
+function KTUMatchFrameToBleedSize(theFrame) {
     // set the measurement units to Points, so our math lower down will work out
     app.scriptPreferences.measurementUnit = MeasurementUnits.POINTS;
     // set the ruler to "spread", again so our math works out.
@@ -51,15 +62,20 @@ function KTUmatchFrameToBleedSize(theFrame) {
                 theFrame.parentPage.bounds[3] + 0];
         }
     }
+    // return ruler and measuremeant prefs to previous values
     theDoc.viewPreferences.rulerOrigin = RulerOrigin.SPREAD_ORIGIN
+    app.scriptPreferences.measurementUnit = AutoEnum.AUTO_VALUE
+    return theFrame
 }
 
 // TOGGLE BINDING DIRECTION
+// returns documentPreferences.pageBinding.PageBindingOptions
 function KTUToggleBindingDirection(aDocument) {
     aDocument.documentPreferences.pageBinding = 
         aDocument.documentPreferences.pageBinding == PageBindingOptions.LEFT_TO_RIGHT ? 
             PageBindingOptions.RIGHT_TO_LEFT : 
             PageBindingOptions.LEFT_TO_RIGHT            
+    return aDocument.documentPreferences.pageBinding.PageBindingOptions
 }
 
 // CHECK BINDING FOR RIGHT-TO-LEFT SETTING
