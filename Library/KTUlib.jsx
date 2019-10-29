@@ -5,7 +5,6 @@ October 2019
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 // Set up some convenient variables
-
 var theDoc    = app.activeDocument
 var thePages  = app.activeDocument.pages
 var theLayers = app.activeDocument.layers
