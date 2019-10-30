@@ -24,7 +24,7 @@ var deEscalateChars = function (obj)
 // Send script to KTUDoScriptAsUndoable with app.selection as its argument,
 // and do it within a try/catch
 try { 
-    KTUDoScriptAsUndoable(deEscalateChars(app.selection[0]), "Match Art of Selection to Bleed")
+    KTUDoScriptAsUndoable(deEscalateChars(app.selection[0]), "De-Escalate Characters in Frame")
 } catch(err) {
     alert("Error: " + err.description) 
 }

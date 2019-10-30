@@ -33,7 +33,7 @@ var squeezeChars = function (obj, scalefactor)
 // Send script to KTUDoScriptAsUndoable with app.selection as its argument,
 // and do it within a try/catch
 try { 
-    KTUDoScriptAsUndoable(squeezeChars(app.selection[0], .85), "Match Art of Selection to Bleed")
+    KTUDoScriptAsUndoable(squeezeChars(app.selection[0], .85), "Deflate Characters in Frame")
 } catch(err) {
     alert("Error: " + err.description) 
 }
