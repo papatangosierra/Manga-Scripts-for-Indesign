@@ -1,22 +1,15 @@
+#include "../Library/KTUlib.jsx"
+
 // Set up window to use for progress bar when reversing pages, but don't display yet.
 var w = new Window ("palette"); // must be defined at top level
 var myMessage = w.add ("statictext"); 
 myMessage.text = "Reversing page order...";
 
-function lockAllItems () {
-    app.activeDocument.pageItems.everyItem().locked = true;  
-}
 
-function unlockAllItems() {
-    app.activeDocument.pageItems.everyItem().locked = false;  
-}
+var reverseSpreadOrder = function () {
+    // first, lock all items in the document in place
+    KTULockAllItems(theDoc)
 
-function toggleBindingDirection() {
-    app.documents[0].documentPreferences.pageBinding = 
-        app.documents[0].documentPreferences.pageBinding == PageBindingOptions.LEFT_TO_RIGHT ? PageBindingOptions.RIGHT_TO_LEFT : PageBindingOptions.LEFT_TO_RIGHT;
-}
-
-function reverseSpreadOrder() {
     if (!w.pbar) { // if the progress bar doesn't exist
         w.pbar = w.add('progressbar', undefined, 0, app.activeDocument.spreads.length); 
     } else {
@@ -38,11 +31,17 @@ function reverseSpreadOrder() {
         w.update(); // Have to call this, or the progress bar won't update.
     }
     w.close();
+    
+    // then reverse the binding direction from wherever it was
+    KTUToggleBindingDirection(theDoc)
+
+    // then unlock all items in the document
+    KTUUnLockAllItems(theDoc)
 }
 
-// execute steps in order
+try { 
+    KTUDoScriptAsUndoable(reverseSpreadOrder, "Reverse Interior")
+} catch(err) {
+    alert("Error: " + err.description) 
+}
 
-lockAllItems()
-reverseSpreadOrder()
-toggleBindingDirection()
-unlockAllItems()

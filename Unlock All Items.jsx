@@ -1,14 +1,14 @@
 ﻿#include "Library/KTUlib.jsx"
 
-// this function unlocks all items in the document 
+// this function calls KTULockAllItems, to unlock all items in the document
 var unlockAllItems = function () {
-    app.activeDocument.pageItems.everyItem().locked = false;  
+    KTUUnlockAllItems(theDoc);  
 }
 
 // Send script to KTUDoScriptAsUndoable, just for form's sake,
 // and do it within a try/catch, again, just for form's sake
 try { 
-    KTUDoScriptAsUndoable(unlockAllItems, "Select All On Right Page")
+    KTUDoScriptAsUndoable(unlockAllItems, "Unlock All Items")
 } catch(err) {
     alert("Error: " + err.description) 
 }

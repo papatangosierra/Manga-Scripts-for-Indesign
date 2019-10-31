@@ -11,8 +11,9 @@ var theLayers = app.activeDocument.layers
 var theMaster = app.activeDocument.masterSpreads.itemByName('A-Master')
 
 // EXECUTE SCRIPT AS SINGLE UNDOABLE STEP
-// Argument: 1: The script to execute, 2: A string representing the name of the script
+// Argument: 1: The script to execute, 2: A string representing the action of the script to the user
 // Returns: The the return value of the executed script, maybe.
+
 function KTUDoScriptAsUndoable(theScript, scriptDesc) {
     if (parseFloat(app.version) < 6) {
         return theScript() // execute script
@@ -20,6 +21,23 @@ function KTUDoScriptAsUndoable(theScript, scriptDesc) {
         app.doScript(theScript, ScriptLanguage.JAVASCRIPT, undefined, UndoModes.ENTIRE_SCRIPT, scriptDesc)
     }
 }
+
+// EXECUTE SCRIPT ON EVERY PAGE
+// Argument: 1: The script to execute, 2: A string representing the action of the script to the user
+// The function passed as an argument to this script should take a single Page object as its argument, and apply some transformation
+// to that page or to the objects contained within it. 
+// Returns: The the return value of the executed script, maybe.
+
+function KTUDoEveryPage(theScript, scriptDesc) {
+    if (parseFloat(app.version) < 6) {
+        return theScript(thePages[i]) // execute script on current page, pre CS6
+    } else {
+        for (var i = 0; i < thePages.length; i++) { // execute script on current page, post CS6
+            app.doScript(theScript(thePages[i]), ScriptLanguage.JAVASCRIPT, undefined, UndoModes.ENTIRE_SCRIPT, scriptDesc)
+        }
+    }
+}
+
 
 // MATCH PAGE TO BLEED SIZE
 
@@ -73,8 +91,8 @@ function KTUToggleBindingDirection(aDocument) {
     aDocument.documentPreferences.pageBinding = 
         aDocument.documentPreferences.pageBinding == PageBindingOptions.LEFT_TO_RIGHT ? 
             PageBindingOptions.RIGHT_TO_LEFT : 
-            PageBindingOptions.LEFT_TO_RIGHT            
-    return aDocument.documentPreferences.pageBinding.PageBindingOptions
+            PageBindingOptions.LEFT_TO_RIGHT
+    return aDocument.documentPreferences.pageBinding
 }
 
 // CHECK BINDING FOR RIGHT-TO-LEFT SETTING
