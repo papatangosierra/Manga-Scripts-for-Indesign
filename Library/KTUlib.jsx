@@ -113,3 +113,9 @@ function KTULockAllItems(aDocument) {
 function KTUUnLockAllItems(aDocument) {
         aDocument.pageItems.everyItem().locked = false
 }
+
+// APPLY MASTER TO PAGE
+// Takes a page and a master page as arguments, and applies the given master page to the given page
+function KTUApplyMasterToPage(aPage,aMaster) {
+    aPage.appliedMaster = aMaster
+}

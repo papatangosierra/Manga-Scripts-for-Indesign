@@ -2,7 +2,7 @@
 
 // squeezeChars takes a textframe and a scaling factor as its arguments.
 // It progressively decreases each character in size until it reaches the middle character of text in the frame, then gradually
-// returns each character to the original size.
+// returns each character to the original size. It includes logic to deal with even and odd numbers of characters gracefully.
 
 var squeezeChars = function (obj, scalefactor)
 {

@@ -1,6 +1,6 @@
 ﻿#include "../Library/KTUlib.jsx"
 
-// De-Escalate Characters makes each character in the currently selected text frame smaller than the character before it.
+// Escalate Characters makes each character in the currently selected text frame smlargeraller than the character before it.
 // It takes an object as an argument, and returns either a function that applies progressively smaller point sizes to an object,
 // or a function that displays an alert specifying that a text frame must be selected.
 var escalateChars = function (obj)

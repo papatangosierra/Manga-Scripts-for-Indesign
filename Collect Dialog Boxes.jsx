@@ -2,7 +2,6 @@
 
 function returnDialogStructure () {
     var dialogPages = []; // dialogPages will be an array of arrays. Each sub-array will contain zero or more strings, each string corresponding to a single dialog bubble
-    // pseudocode
     for (var i = 0; i < app.activeDocument.pages.length; i++) { // loop over pages
         dialogPages.push([]); // Add an empty array for every page we iterate over. 
         for (var j = 0; j < app.activeDocument.pages[i].textFrames.length; j++) { // loop over textFrames
