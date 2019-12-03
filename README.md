@@ -25,8 +25,6 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 
 ## Art Placement
 
-**Set Master Art Scaling** sets a scaling factor for the art frames in the A-Master page, and therefore for all art placed using **Initialize Document** or **Auto-Place Artwork From Folder.** You should use it to arrive at an approximately correct scaling factor for a given book, bearing in mind that individual pages may need to be adjusted later depending on the nature of the art assets. Once you have adjusted an art frame manually, its relationship to the A-master art frame is broken and _it will no longer be affected by subsequent adjustments made with this script_.
-
 **Create Master Page Art Frames** creates two empty graphics frames on the _A-Master_ master page, sized to the page size plus 1/8" bleed on the outer edges. This is useful for setting up container frames that page artwork will later be dropped into. The container frames will inherit various attributes from the frames on the master page, which is useful for bulk adjusting the scale and placement of the art frames throughout the document.
 
 **Move All Graphics to Art Layer** moves all graphic frames in the document to the bottom-most layer.
@@ -40,6 +38,7 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 - The scaling percentage is applied based on the current scaling equalling 100%. This means if you set a scaling percentage of 80%, then decide that's too small and  re-run the script with a percentage of 90%, the art will get smaller again, because you are specifying a size that's 90% as big as the size that resulted from the first 80% scaling.
 - Because of certain assumptions the script makes, it will not be reliable unless used in conjunction with graphics frames placed using the **Create Master Page Art Frames** script.
 - Depending on the art assets, individual pages may need to have their scaling factor adjusted. This script is meant to assist in arriving at a reasonable ballpark figure.
+- Once you have adjusted an art frame manually, its relationship to the A-master art frame is broken and _it will no longer be affected by subsequent adjustments made with this script_.
 
 ## Guide Placement
 
