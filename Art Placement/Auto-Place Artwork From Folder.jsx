@@ -17,22 +17,41 @@ var doublePgMatchExpr = /[pP]?\d+[\-\_][pP]?\d+\.(tif|TIF|psd|PSD|tiff|TIFF)/ //
 /* Function for recursively pushing matching art files onto artFileArr. It's not great to have a recursive function modifying an array outside of its own scope,
 but I don't feel like figuring out how to make fileList more cleanly recursive right now. */
 
+// create an external variable we'll use to keep track of the highest-numbered page
+var lastPage = 0
+
 function findArtFiles(fileList) { // add files whose names match singlePgMatchExpr to the artFileArr array
     var foundFiles = []
-    for (i=0; i < fileList.length; i++) {
-        if (fileList[i].displayName.match(singlePgMatchExpr)) { // if current element's filename matches our expression
-            foundFiles.push(fileList[i]) // add file to the array we'll be returning
-        }
-        if (Folder.isPrototypeOf(fileList[i])) { // if the current element has the Folder object as a prototype, e.g., it is a folder…
-            foundFiles.concat(findArtFiles(fileList[i].getFiles())) // recurse and continue, concatenating as we go
+    for (var i=0; i < fileList.length; i++) {
+        $.writeln('total files to eval: ' + fileList.length)
+        $.writeln('evaluating: ' + fileList[i].name + ', iteration ' + i)
+        if (fileList[i].constructor == Folder) { // if the current element has the Folder object as a constructor, e.g., it is a folder…
+            $.writeln('found Folder: ' + fileList[i].name)
+            foundFiles = foundFiles.concat(findArtFiles(fileList[i].getFiles())) // recurse and continue, concatenating as we go
+        } else {
+            if (fileList[i].displayName.match(singlePgMatchExpr)) { // if current element's filename matches our expression
+                foundFiles.push(fileList[i]) // add file to the array we'll be returning
+                // check if filename is bigger than the last biggest one
+                if (parseInt(fileList[i].displayName.match(/\d+/)[0], 10) > lastPage) {
+                    lastPage = parseInt(fileList[i].displayName.match(/\d+/)[0], 10) // if it is, parse the match as an int and assign it to lastPage
+                }
+            }
         }
     }
     return foundFiles
 }
 
-
-// intialize the artFileArr by prompting for a folder to start with, getting the contents, and passing them to our art-finding script
-var artFileArr = findArtFiles(Folder.selectDialog('Select folder containing page art assets to place.').getFiles()) 
+function addPagesUpToSignature(highestPage) {
+    signaturePages = highestPage + (16 - (highestPage % 16))
+    for (i=0; i < signaturePages - 1 ; i++) { // add one less than the number of pages in signaturePages because the document already has one page.
+        app.activeDocument.pages.add(
+            LocationOptions.AT_END,
+            {
+                appliedMaster: app.activeDocument.masterSpreads.itemByName('A-Master')
+            }
+        )
+    }
+}
  
 function placeAllArtwork() {
     if (!w.pbar) { // if the progress bar doesn't exist
@@ -49,16 +68,22 @@ function placeAllArtwork() {
             //in order to strip any leading "0" characters from the match. It does this because 
             //the itemByName method will only match correctly if the _string_ value matches the page
             //number.
-        var currentPage = app.activeDocument.pages.itemByName(parseInt(artFileArr[i].name.match(/\d+/)[0], 10).toString())
-        app.activeWindow.activePage = currentPage
+        var currentPage = app.activeDocument.pages.itemByName(parseInt(artFileArr[i].displayName.match(/\d+/)[0], 10).toString())
         var artFrame = currentPage.masterPageItems[0].override(currentPage) // detatch master art frame instance on current page and make it editable
+        // app.activeWindow.activePage = currentPage // jump view to page being placed
         artFrame.place(artFileArr[i])
 
-        w.pbar.value = i + 1;
+        w.pbar.value = i + 1; // increment progress bar
         w.update() // Have to call this, or the progress bar won't update.
     }
     w.close()   
 }
+
+// intialize the artFileArr by prompting for a folder to start with, getting the contents, and passing them to our art-finding script
+var artFileArr = findArtFiles(Folder.selectDialog('Select folder containing page art assets to place.').getFiles()) 
+
+
+addPagesUpToSignature(lastPage)
 
 placeAllArtwork()
 

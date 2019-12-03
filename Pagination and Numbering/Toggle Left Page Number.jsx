@@ -1,4 +1,4 @@
-// This script applies the B-master to the left-side page of the current spread, asuming right-to-left binding order.
+// This script applies the B-master to the right-side page of the current spread, asuming right-to-left binding order.
 
 function applyMasterToPage(thePage,theMaster) {
     thePage.appliedMaster = app.activeDocument.masterSpreads.itemByName(theMaster)

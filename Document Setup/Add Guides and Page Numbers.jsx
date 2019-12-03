@@ -37,7 +37,7 @@ theMaster.guides.add(
 // Add recto inside guide
 theMaster.guides.add(
     {
-        label: 'VersoInside',
+        label: 'RectoInside',
         orientation: HorizontalOrVertical.VERTICAL,
         location: '42'
     }
@@ -47,33 +47,29 @@ theMaster.guides.add(
 // Add recto outside guide
 theMaster.guides.add(
     {
-        label: 'VersoOutside',
+        label: 'RectoOutside',
         orientation: HorizontalOrVertical.VERTICAL,
         location: theMaster.pages[0].bounds[1] - 30
     }
 )
 
-
-
 // Add verso inside guide
 theMaster.guides.add(
     {
-        label: 'RectoInside',
+        label: 'VersoInside',
         orientation: HorizontalOrVertical.VERTICAL,
         location: -42
     }
 )
 
-
 // Add verso outside guide
 theMaster.guides.add(
     {
-        label: 'RectoOutside',
+        label: 'VersoOutside',
         orientation: HorizontalOrVertical.VERTICAL,
         location: -theMaster.pages[1].bounds[3] + 30
     }
 )
-
 
 // PAGE NUMBERS SETUP INCLUDES
 // - Create B-Master Page
@@ -92,7 +88,7 @@ pageNumberStyle = app.activeDocument.paragraphStyles.add({
 })
 
 // Calculate placement of verso page number box based on placement of named guides
-var versoTopLeftX = theMaster.guides.itemByName('VersoOutside').location - 30
+var versoTopLeftX = theMaster.guides.itemByName('VersoOutside').location + 30
 var versoTopLeftY = theMaster.guides.itemByName('Bottom').location
 var versoBottomLeftX = theMaster.guides.itemByName('VersoOutside').location
 var versoBottomLeftY = theMaster.guides.itemByName('Bottom').location + 15
@@ -100,21 +96,22 @@ var versoBottomLeftY = theMaster.guides.itemByName('Bottom').location + 15
 // Calculate placement of recto page number box based on placement of named guides
 var rectoTopLeftX = theMaster.guides.itemByName('RectoOutside').location
 var rectoTopLeftY = theMaster.guides.itemByName('Bottom').location
-var rectoBottomLeftX = theMaster.guides.itemByName('RectoOutside').location + 30
+var rectoBottomLeftX = theMaster.guides.itemByName('RectoOutside').location - 30
 var rectoBottomLeftY = theMaster.guides.itemByName('Bottom').location + 15
 
 
 // Add text boxes with page numbers to B-Master
 theBMaster.textFrames.add(app.activeDocument.layers[0], LocationOptions.AT_END, theBMaster, {
     contents: SpecialCharacters.AUTO_PAGE_NUMBER,
+    paragraphStyle: pageNumberStyle,
     geometricBounds: [versoTopLeftY,versoTopLeftX,versoBottomLeftY,versoBottomLeftX],
 })
 
 theBMaster.textFrames.add(app.activeDocument.layers[0], LocationOptions.AT_END, theBMaster, {
     contents: SpecialCharacters.AUTO_PAGE_NUMBER,
+    paragraphStyle: pageNumberStyle,
     geometricBounds: [rectoTopLeftY,rectoTopLeftX,rectoBottomLeftY,rectoBottomLeftX],
 })
-
 
 // When we're done, change the scriptPreferences MeasurementUnit to its default, so
 // we don't accidentally break any other scripts.
