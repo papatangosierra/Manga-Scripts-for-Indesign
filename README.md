@@ -2,7 +2,30 @@
 
 Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision when lettering Japanese comics in English.
 
+## News
+
+- Error handling is improved all around
+- Most scripts--especially the text design ones--now consolidate their actions within a single undoable step
+- Added document setup automation, including automatic placing of art
+
+## Document Setup
+
+**Add Guides and Pages Numbers** adds horizontal and vertical guides to the A-Master page, and creates a B-Master page with page numbers already placed.
+
+**Initialize Document** should be run immediately after creating a new document at the desired trim size. This script:
+1. Creates separate layers for guides, text, SFX, page numbers, retouching, design, and art, in that order.
+2. Creates A- and B-master pages.
+3. Places guides on the A-master page, and sets the B-master page to inhert the A-master.
+4. Places art frames sized to the trim size on the A-master page.
+5. Places automatic page numbers on the B-master page.
+6. Prompts the user for a folder to search for page art assets (a folder of subfolders may be selected; the file-search algorithm is recursive)
+7. Parses the art asset filenames to determine page order and book length
+8. Adds a number of pages to the document equal to the highest identified page rounded up to the nearest 16-page signature.
+9. Places each art file in the art frame of the corresponding page.
+
 ## Art Placement
+
+**Set Master Art Scaling** sets a scaling factor for the art frames in the A-Master page, and therefore for all art placed using **Initialize Document** or **Auto-Place Artwork From Folder.** You should use it to arrive at an approximately correct scaling factor for a given book, bearing in mind that individual pages may need to be adjusted later depending on the nature of the art assets. Once you have adjusted an art frame manually, its relationship to the A-master art frame is broken and _it will no longer be affected by subsequent adjustments made with this script_.
 
 **Create Master Page Art Frames** creates two empty graphics frames on the _A-Master_ master page, sized to the page size plus 1/8" bleed on the outer edges. This is useful for setting up container frames that page artwork will later be dropped into. The container frames will inherit various attributes from the frames on the master page, which is useful for bulk adjusting the scale and placement of the art frames throughout the document.
 
@@ -91,10 +114,6 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 ## TODO
 
-- Add better (which is to say, any) error handling in basically all scripts
-- Add setup script for B-Master page (which will include a page number) (or add that handling logic to the "toggle page number" scripts)
 - Add script that moves all text frames to Text layer.
 - Add setup scripts for common dialogue, caption, aside, and SFX paragraph styles
 - Add setup scripts for common character styles
-- Improve SFX scripts to be undo-able in a single ctrl-z.
-- Adjust magic numbers of SFX scripts, especially Jumble
