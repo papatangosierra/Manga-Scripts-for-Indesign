@@ -2,6 +2,27 @@
 
 Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision when lettering Japanese comics in English.
 
+## News
+
+- Error handling is improved all around
+- Most scripts--especially the text design ones--now consolidate their actions within a single undoable step
+- Added document setup automation, including automatic placing of art
+
+## Document Setup
+
+**Add Guides and Pages Numbers** adds horizontal and vertical guides to the A-Master page, and creates a B-Master page with page numbers already placed.
+
+**Initialize Document** should be run immediately after creating a new document at the desired trim size. This script:
+1. Creates separate layers for guides, text, SFX, page numbers, retouching, design, and art, in that order.
+2. Creates A- and B-master pages.
+3. Places guides on the A-master page, and sets the B-master page to inhert the A-master.
+4. Places art frames sized to the trim size on the A-master page.
+5. Places automatic page numbers on the B-master page.
+6. Prompts the user for a folder to search for page art assets (a folder of subfolders may be selected; the file-search algorithm is recursive)
+7. Parses the art asset filenames to determine page order and book length
+8. Adds a number of pages to the document equal to the highest identified page rounded up to the nearest 16-page signature.
+9. Places each art file in the art frame of the corresponding page.
+
 ## Art Placement
 
 **Create Master Page Art Frames** creates two empty graphics frames on the _A-Master_ master page, sized to the page size plus 1/8" bleed on the outer edges. This is useful for setting up container frames that page artwork will later be dropped into. The container frames will inherit various attributes from the frames on the master page, which is useful for bulk adjusting the scale and placement of the art frames throughout the document.
@@ -10,11 +31,14 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 
 **Move Page Graphics to Art Layer** moves all graphic frames on the current page to the bottom-most layer.
 
+**Auto-Place Art From Folder** is extremely fragile, but currently does allow you to specify a folder from which art whose filenames matches a certain pattern will be automatically placed on the appropriate page. This is more for experimentation than it is for serious use.
+
 **Set Master Art Scaling** adjust the master page graphic frames created using **Create Master Page Art Frames** in such a way as to affect the scaling of every image placed in one of the child graphic frames. This allows you to quickly find an appropriate scaling percentage for placed artwork _en masse_, without having to individually adjust every graphic frame. Please be advised of the following caveats:
 
 - The scaling percentage is applied based on the current scaling equalling 100%. This means if you set a scaling percentage of 80%, then decide that's too small and  re-run the script with a percentage of 90%, the art will get smaller again, because you are specifying a size that's 90% as big as the size that resulted from the first 80% scaling.
 - Because of certain assumptions the script makes, it will not be reliable unless used in conjunction with graphics frames placed using the **Create Master Page Art Frames** script.
 - Depending on the art assets, individual pages may need to have their scaling factor adjusted. This script is meant to assist in arriving at a reasonable ballpark figure.
+- Once you have adjusted an art frame manually, its relationship to the A-master art frame is broken and _it will no longer be affected by subsequent adjustments made with this script_.
 
 ## Guide Placement
 
@@ -59,6 +83,10 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 **Rotate Characters** rotates each character in the text box by a slight random amount, alternating clockwise and counterclockwise directions.
 
+**Stack Characters** stacks all of the text in a frame vertically, with a line break between each character
+
+![example of the output of the various text design scripts](Text Design/Text Design Examples.png)
+
 ## Et Cetera
 
 **Create New R-to-L Document** creates a new document with the binding direction set right-to-left. This may be useful for older versions of InDesign where the document's binding direction cannot be changed after it's created.
@@ -85,10 +113,6 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 ## TODO
 
-- Add better (which is to say, any) error handling in basically all scripts
-- Add setup script for B-Master page (which will include a page number) (or add that handling logic to the "toggle page number" scripts)
 - Add script that moves all text frames to Text layer.
 - Add setup scripts for common dialogue, caption, aside, and SFX paragraph styles
 - Add setup scripts for common character styles
-- Improve SFX scripts to be undo-able in a single ctrl-z.
-- Adjust magic numbers of SFX scripts, especially Jumble
