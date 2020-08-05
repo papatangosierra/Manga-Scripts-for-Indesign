@@ -27,7 +27,7 @@ function findArtFiles(fileList) { // add files whose names match singlePgMatchEx
         $.writeln('evaluating: ' + fileList[i].name + ', iteration ' + i)
         if (fileList[i].constructor == Folder) { // if the current element has the Folder object as a constructor, e.g., it is a folder…
             $.writeln('found Folder: ' + fileList[i].name)
-            foundFiles = foundFiles.concat(findArtFiles(fileList[i].getFiles())) // recurse and continue, concatenating as we go
+            foundFiles = concat(foundFiles, findArtFiles(fileList[i].getFiles())) // recurse and continue, concatenating as we go
         } else {
             if (fileList[i].displayName.match(singlePgMatchExpr)) { // if current element's filename matches our expression
                 foundFiles.push(fileList[i]) // add file to the array we'll be returning
@@ -98,3 +98,9 @@ var artFrame = app.activeDocument.pages[0].masterPageItems[0].override(currentPa
 //place art file in newly-created frame
 artFrame.place(myArtFile)
 */
+
+function concat(arr1, arr2){
+    for (var j = 0; j < arr2.length; j++)
+        arr1.push(arr2[j]);
+    return arr1;
+}
