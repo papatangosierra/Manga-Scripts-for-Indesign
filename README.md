@@ -2,12 +2,14 @@
 
 Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision when lettering Japanese comics in English.
 
+***
 ## Important Note
 
 **These scripts are designed to be used together as a package.** Most of them make use of functions defined in the `Library/KTUlib.jsx` file, and they rely both on being able to assume that file's location and their own location. You should place  If this is incompatible with your workflow, let me know and I can help you create standalone versions of the scripts you need.
 
 **To download the complete package**, click the green **Code** button above the file list, and select "Download Zip." Unzip the archive at the top level of your InDesign script folder and you'll be in business.
-
+***
+# The Scripts in this Package
 ## Document Setup
 
 **Add Guides and Pages Numbers** adds horizontal and vertical guides to the A-Master page, and creates a B-Master page with page numbers already placed.
@@ -91,7 +93,7 @@ These are a collections of scripts to aid in designing more expressive sound eff
 
 **Create New R-to-L Document** creates a new document with the binding direction set right-to-left. This may be useful for older versions of InDesign where the document's binding direction cannot be changed after it's created.
 
-**Create Translation Note Graphic** creates a thumbnail for excerpting a section of a page in translation endnotes. To use this script, select every object that will appear—even partially—in the thumbnail, then run the script. It will move a grouped and framed copy of the selected objects to the clipboard, and create a "Translation Note Graphic" object style if one does not already exist. You can use this style to give the thumbnails a stroke (I recommend a stroke size of 1 point). Note that there circumstances wherein thumbnails created this way can generate overset text errors, and the author hasn't quite figured out why, yet.
+**Create Translation Note Graphic** creates a thumbnail for excerpting a section of a page in translation endnotes. To use this script, select every object that will appear—even partially—in the thumbnail, then run the script. It will move a grouped and framed copy of the selected objects to the clipboard, and create a "Translation Note Graphic" object style if one does not already exist. You can use this style to give the thumbnails a stroke (I recommend a stroke size of 1 point). **Note:** There seem to be circumstances wherein thumbnails created this way can generate overset text errors, and the author hasn't quite figured out why, yet.
 
 **Find Empty Text Frames** selects the next text frame that contains no text, and displays an alert if it finds none. This is useful for checking a finished book or section for missed lettering.
 
