@@ -2,11 +2,11 @@
 
 Herewith please avail yourself of this package of InDesign automations aimed at decreasing drudgery and imprecision when lettering Japanese comics in English.
 
-## News
+## Important Note
 
-- Error handling is improved all around
-- Most scripts--especially the text design ones--now consolidate their actions within a single undoable step
-- Added document setup automation, including automatic placing of art
+**These scripts are designed to be used together as a package.** Most of them make use of functions defined in the `Library/KTUlib.jsx` file, and they rely both on being able to assume that file's location and their own location. You should place  If this is incompatible with your workflow, let me know and I can help you create standalone versions of the scripts you need.
+
+**To download the complete package**, click the green **Code** button above the file list, and select "Download Zip." Unzip the archive at the top level of your InDesign script folder and you'll be in business.
 
 ## Document Setup
 
