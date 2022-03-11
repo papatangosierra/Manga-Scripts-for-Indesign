@@ -5,7 +5,7 @@ Herewith please avail yourself of this package of InDesign automations aimed at 
 ***
 ## Important Note
 
-**These scripts are designed to be used together as a package.** Most of them make use of functions defined in the `Library/KTUlib.jsx` file, and they rely both on being able to assume that file's location and their own location. You should place  If this is incompatible with your workflow, let me know and I can help you create standalone versions of the scripts you need.
+**These scripts are designed to be used together as a package.** Most of them make use of functions defined in the `Library/KTUlib.jsx` file, and they rely both on being able to assume that file's location and their own location. Wherever you prefer to install the scripts, you need to make a `Library` folder there and place `KTUlib.jsx` inside it. If this is incompatible with your workflow, let me know and I can help you create standalone versions of the scripts you need.
 
 **To download the complete package**, click the green **Code** button above the file list, and select "Download Zip." Unzip the archive at the top level of your InDesign script folder and you'll be in business.
 ***
